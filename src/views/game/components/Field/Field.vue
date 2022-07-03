@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :style="{ height: `${fieldSize}px`, width: `${fieldSize}px` }">
-    <div v-for="line in oneLineFields" class="line" :style="{ height: `${squareSize}px` } ">
+    <div v-for="line in oneLineFields" class="line" :style="{ height: `${squareSize}px` }">
       <div v-for="field in oneLineFields" class="field" :style="{ width: `${squareSize}px` }"></div>
     </div>
 
@@ -10,14 +10,28 @@
 
 </template>
 
-<script setup lang="ts">
-import { useStore } from 'vuex';
+<script>
+import { mapState } from 'vuex';
 
 import SnakeController from '@/views/game/components/SnakeController/SnakeController.vue';
 import FeedController from '@/views/game/components/FeedController/FeedController.vue';
 
-const { lineSize, fieldSize, squareSize } = useStore().state.snake;
-const oneLineFields = new Array(lineSize).fill('');
+export default {
+  components: {SnakeController, FeedController},
+  data: () => ({
+    oneLineFields: []
+  }),
+  computed: {
+    ...mapState({
+      lineSize: state => state.settings.lineSize,
+      fieldSize: state => state.settings.fieldSize,
+      squareSize: state => state.settings.squareSize,
+    })
+  },
+  beforeMount() {
+    this.oneLineFields = new Array(this.lineSize).fill('');
+  }
+}
 
 </script>
 

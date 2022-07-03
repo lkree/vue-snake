@@ -1,2 +1,2 @@
 export const FIELD_SIZE = 500;
-export const TOTAL_SQUARES = 49;
+export const LINE_SIZE = 10;

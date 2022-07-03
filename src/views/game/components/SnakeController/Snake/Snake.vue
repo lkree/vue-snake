@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapState({
-      squareSize: (state) => state.snake.squareSize
+      squareSize: (state) => state.settings.squareSize
     })
   }
 }
